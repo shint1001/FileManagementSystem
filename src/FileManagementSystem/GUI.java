@@ -46,23 +46,18 @@ public class GUI extends JFrame {
         table.setAutoCreateRowSorter(true);
         table.setShowVerticalLines(false);
 
-        listSelectionListener = new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent lse) {
-                int row = table.getSelectionModel().getLeadSelectionIndex();
-                setAddrPanel(((FileTableModel) table.getModel()).getFile(row));
-            }
+        listSelectionListener = lse -> {
+            int row = table.getSelectionModel().getLeadSelectionIndex();
+            setAddrPanel(((FileTableModel) table.getModel()).getFile(row));
         };
         table.getSelectionModel().addListSelectionListener(listSelectionListener);
 
-        TreeSelectionListener treeSelectionListener = new TreeSelectionListener() {
-            public void valueChanged(TreeSelectionEvent tse){
-                File node =
-                        (File)tse.getPath().getLastPathComponent();
-                showChildren(new DefaultMutableTreeNode(node));
-                setAddrPanel(node);
-                viewFileContent(node);
-            }
+        TreeSelectionListener treeSelectionListener = tse -> {
+            File node =
+                    (File)tse.getPath().getLastPathComponent();
+            showChildren(new DefaultMutableTreeNode(node));
+            setAddrPanel(node);
+            viewFileContent(node);
         };
 
         File[] roots = fileSystemView.getRoots();
@@ -80,7 +75,7 @@ public class GUI extends JFrame {
 
         direcTree.setModel(new FilesContentProvider(root.toString()));
         direcTree.addTreeSelectionListener(treeSelectionListener);
-        direcTree.setRootVisible(false);
+        direcTree.setRootVisible(true);
         direcTree.expandRow(0);
     }
 
@@ -151,9 +146,6 @@ public class GUI extends JFrame {
             zipFileClicked();
         });
         JMenuItem unzipFile = new JMenuItem("Unzip File");
-        JMenuItem viewFileContent = new JMenuItem("View File Content");
-        viewFileContent.addActionListener((e) -> {
-        });
 
         file.add(createFile);
         file.add(deleteFile);
@@ -161,12 +153,20 @@ public class GUI extends JFrame {
         file.add(copyFile);
         file.add(zipFile);
         file.add(unzipFile);
-        file.add(viewFileContent);
 
         JMenu folder = new JMenu("Folder");
         JMenuItem createFolder = new JMenuItem("Create Folder");
+        createFolder.addActionListener((e) -> {
+            createFolderClicked();
+        });
         JMenuItem deleteFolder = new JMenuItem("Delete Folder");
+        deleteFolder.addActionListener((e) -> {
+            deleteFolderClicked();
+        });
         JMenuItem renameFolder = new JMenuItem("Rename Folder");
+        renameFolder.addActionListener((e) -> {
+            renameFolderClicked();
+        });
 
         folder.add(createFolder);
         folder.add(deleteFolder);
@@ -175,6 +175,127 @@ public class GUI extends JFrame {
         mb.add(file);
         mb.add(folder);
         return mb;
+    }
+
+    private void renameFolderClicked() {
+        JFrame renameFolderFrame = new JFrame("Rename File");
+        JPanel renameFolderPanel = new JPanel();
+
+        JTextField newFilePath = new JTextField(direcTree.getLastSelectedPathComponent().toString());
+        JButton submitButton = new JButton("Submit");
+        JButton cancelButton = new JButton("Cancel");
+
+        renameFolderPanel.add(new JLabel("Path"));
+        renameFolderPanel.add(newFilePath);
+        renameFolderPanel.add(submitButton);
+        renameFolderPanel.add(cancelButton);
+        renameFolderPanel.setLayout(new GridLayout(2, 2));
+        renameFolderPanel.setPreferredSize(new Dimension(500, 50));
+
+        renameFolderFrame.setContentPane(renameFolderPanel);
+
+        submitButton.addActionListener((e) -> {
+            var newFileName = newFilePath.getText();
+            File newFile = new File(newFileName);
+            String Root = direcTree.getModel().getRoot().toString();
+            TreePath [] paths = direcTree.getSelectionPaths();
+            for(TreePath path : paths) {
+                String filePath = path.getLastPathComponent().toString();
+                File f = new File(filePath);
+                if(!f.renameTo(newFile) && !f.isDirectory()){
+                    System.out.println(f);
+                    JOptionPane.showMessageDialog(null, f.getAbsolutePath() + "can't be renamed.");
+                    return;
+                }
+                JOptionPane.showMessageDialog(null, f.getAbsolutePath()+ " is renamed.");
+            }
+            renameFolderFrame.setVisible(false);
+            direcTree.setModel(new FilesContentProvider(""));
+            direcTree.setModel(new FilesContentProvider(Root));
+        });
+        cancelButton.addActionListener((e) -> {
+            renameFolderFrame.setVisible(false);
+        });
+
+        renameFolderFrame.pack();
+        renameFolderFrame.setLocationRelativeTo(null);
+        renameFolderFrame.setVisible(true);
+
+    }
+
+    private void deleteFolderClicked() {
+        String Root = direcTree.getModel().getRoot().toString();
+        TreePath [] paths = direcTree.getSelectionPaths();
+        for(TreePath path : paths) {
+            String filePath = path.getLastPathComponent().toString();
+            File f = new File(filePath);
+            if(!deleteDirectory(f)){
+                JOptionPane.showMessageDialog(null, f.getAbsolutePath() + " can't be deleted.");
+                return;
+            }
+            JOptionPane.showMessageDialog(null, f.getAbsolutePath()+ " is deleted.");
+        }
+        direcTree.setModel(new FilesContentProvider(""));
+        direcTree.setModel(new FilesContentProvider(Root));
+    }
+
+    public boolean deleteDirectory(File directory) {
+        if(directory.exists()){
+            File[] files = directory.listFiles();
+            if(null!=files){
+                for(int i=0; i<files.length; i++) {
+                    if(files[i].isDirectory()) {
+                        deleteDirectory(files[i]);
+                    }
+                    else {
+                        files[i].delete();
+                    }
+                }
+            }
+        }
+        return(directory.delete());
+    }
+
+    private void createFolderClicked() {
+        JFrame createFolderFrame = new JFrame("Create Folder");
+        JPanel createFolderPanel = new JPanel();
+
+        JTextField nameFolder = new JTextField();
+        JButton submitButton = new JButton("Submit");
+        JButton cancelButton = new JButton("Cancel");
+
+        createFolderPanel.add(new JLabel("Folder Name: "));
+        createFolderPanel.add(nameFolder);
+        createFolderPanel.add(submitButton);
+        createFolderPanel.add(cancelButton);
+        createFolderPanel.setLayout(new GridLayout(2, 2));
+        createFolderPanel.setPreferredSize(new Dimension(500, 50));
+
+        createFolderFrame.setContentPane(createFolderPanel);
+
+        submitButton.addActionListener((e) -> {
+            String Root = direcTree.getModel().getRoot().toString();
+            String currentRoot = direcTree.getLastSelectedPathComponent().toString();
+            String fileName = nameFolder.getText();
+
+            File f = new File(currentRoot + "/" + fileName);
+            System.out.println(f);
+            boolean newFolder = f.mkdirs();
+            if(newFolder)
+                JOptionPane.showMessageDialog(createFolderPanel, "Directory created successfully");
+            else
+                JOptionPane.showMessageDialog(createFolderPanel, "Couldn’t create specified directory");
+            createFolderFrame.setVisible(false);
+            direcTree.setModel(new FilesContentProvider(""));
+            direcTree.setModel(new FilesContentProvider(Root));
+        });
+        cancelButton.addActionListener((e) -> {
+            createFolderFrame.setVisible(false);
+        });
+
+        createFolderFrame.pack();
+        createFolderFrame.setLocationRelativeTo(null);
+        createFolderFrame.setVisible(true);
     }
 
 
@@ -251,12 +372,8 @@ public class GUI extends JFrame {
                 String filePath = path.getLastPathComponent().toString();
                 zipList.add(filePath);
             }
-            try {
-                zipFile(zipList, chooser.getSelectedFile() + "/" + dest.getText() + ".zip");
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-
+            zipFile(zipList, chooser.getSelectedFile() + "/" + dest.getText() + ".zip");
+            
             zipFileFrame.setVisible(false);
             direcTree.setModel(new FilesContentProvider(""));
             direcTree.setModel(new FilesContentProvider(Root));
@@ -340,7 +457,7 @@ public class GUI extends JFrame {
         JButton submitButton = new JButton("Submit");
         JButton cancelButton = new JButton("Cancel");
 
-        createFilePanel.add(new JLabel("Path"));
+        createFilePanel.add(new JLabel("File Name"));
         createFilePanel.add(path);
         createFilePanel.add(submitButton);
         createFilePanel.add(cancelButton);
@@ -433,6 +550,7 @@ public class GUI extends JFrame {
     }
 
     void viewFileContent(File file) {
+
         try {
             JTextArea jt = new JTextArea();
             BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
@@ -448,7 +566,7 @@ public class GUI extends JFrame {
         Files.copy(source.toPath(), dest.toPath(), REPLACE_EXISTING);
     }
 
-    void zipFile(List<String> srcFiles, String zipFile) throws IOException {
+    void zipFile(List<String> srcFiles, String zipFile) {
         try {
 
             // create byte buffer
@@ -502,8 +620,7 @@ public class GUI extends JFrame {
     }
 
     private void showChildren(final DefaultMutableTreeNode node) {
-
-        SwingWorker<Void, File> worker = new SwingWorker<Void, File>() {
+        SwingWorker<Void, File> worker = new SwingWorker<>() {
             @Override
             public Void doInBackground() {
                 File file = (File) node.getUserObject();
