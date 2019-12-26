@@ -74,6 +74,7 @@ public class GUI extends JFrame {
         }
 
         direcTree.setModel(new FilesContentProvider(root.toString()));
+        direcTree.setCellRenderer(new ItemTreeCellRenderer());
         direcTree.addTreeSelectionListener(treeSelectionListener);
         direcTree.setRootVisible(true);
         direcTree.expandRow(0);
@@ -84,7 +85,7 @@ public class GUI extends JFrame {
         setTitle("File Management System");
         JFrame.setDefaultLookAndFeelDecorated(true);
         setContentPane(mainPanel);
-        setPreferredSize(new Dimension(850, 550));
+        setPreferredSize(new Dimension(760, 520));
 
         mainPanel.setVisible(true);
         mainPanel.setBorder(new EmptyBorder(5,5,5,5));
@@ -94,10 +95,10 @@ public class GUI extends JFrame {
         setModel();
 
         itemPanel = new JScrollPane(table);
-        itemPanel.setPreferredSize(new Dimension(400, 400));
+        itemPanel.setPreferredSize(new Dimension(520, 400));
 
         JScrollPane listItem = new JScrollPane(direcTree);
-        listItem.setPreferredSize(new Dimension(400, 400));
+        listItem.setPreferredSize(new Dimension(200, 400));
 
 
         splitPane = new JSplitPane(
@@ -373,7 +374,7 @@ public class GUI extends JFrame {
                 zipList.add(filePath);
             }
             zipFile(zipList, chooser.getSelectedFile() + "/" + dest.getText() + ".zip");
-            
+
             zipFileFrame.setVisible(false);
             direcTree.setModel(new FilesContentProvider(""));
             direcTree.setModel(new FilesContentProvider(Root));
