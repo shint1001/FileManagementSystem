@@ -2,7 +2,6 @@ package FileManagementSystem;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
-import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import java.awt.*;
 import java.io.File;

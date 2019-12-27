@@ -57,7 +57,7 @@ public class GUI extends JFrame {
                     (File)tse.getPath().getLastPathComponent();
             showChildren(new DefaultMutableTreeNode(node));
             setAddrPanel(node);
-            viewFileContent(node);
+            //viewFileContent(node);
         };
 
         File[] roots = fileSystemView.getRoots();
@@ -76,14 +76,14 @@ public class GUI extends JFrame {
         direcTree.setModel(new FilesContentProvider(root.toString()));
         direcTree.setCellRenderer(new ItemTreeCellRenderer());
         direcTree.addTreeSelectionListener(treeSelectionListener);
-        direcTree.setRootVisible(true);
+        direcTree.setRootVisible(false);
         direcTree.expandRow(0);
     }
 
     GUI() {
         super();
         setTitle("File Management System");
-        JFrame.setDefaultLookAndFeelDecorated(true);
+        setDefaultLookAndFeelDecorated(true);
         setContentPane(mainPanel);
         setPreferredSize(new Dimension(760, 520));
 
@@ -305,9 +305,11 @@ public class GUI extends JFrame {
         JPanel copyFilePanel = new JPanel();
 
         JFileChooser chooser = new JFileChooser("/");
+        JTextField dest = new JTextField();
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        chooser.showSaveDialog(null);
-        JTextField dest = new JTextField(chooser.getSelectedFile().getAbsolutePath());
+        if(chooser.showOpenDialog(copyFileFrame) == JFileChooser.APPROVE_OPTION)
+            dest.setText(chooser.getSelectedFile().getAbsolutePath());
+
         JButton submitButton = new JButton("Submit");
         JButton cancelButton = new JButton("Cancel");
 
@@ -323,15 +325,27 @@ public class GUI extends JFrame {
         submitButton.addActionListener((e) -> {
             String Root = direcTree.getModel().getRoot().toString();
             TreePath[] paths = direcTree.getSelectionPaths();
+            List<String> copyList = new ArrayList<>();
             for (TreePath path : paths) {
                 String filePath = path.getLastPathComponent().toString();
-                File f = new File(filePath);
-                try {
-                    copyFile(f, new File(dest.getText() + "/" + f.getName()));
-                } catch (Exception ex){
-
-                }
+                copyList.add(filePath);
             }
+            Copy copy = new Copy();
+            copy.copyFrame.setVisible(true);
+            try {
+                CopyThread copyThread = new CopyThread(copy.jProgressBar, copyList, dest.getText());
+                String threadId = copyThread.getName();
+                copy.threadId = threadId;
+                copyThread.start();
+                if (copyThread.progress == 100)
+                    copy.copyFrame.setVisible(false);
+
+                direcTree.setModel(new FilesContentProvider(Root));
+
+            } catch (Exception ex) {
+
+            }
+
             copyFileFrame.setVisible(false);
             direcTree.setModel(new FilesContentProvider(""));
             direcTree.setModel(new FilesContentProvider(Root));
@@ -351,7 +365,7 @@ public class GUI extends JFrame {
 
         JFileChooser chooser = new JFileChooser("/");
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        chooser.showSaveDialog(null);
+        chooser.showOpenDialog(zipFileFrame);
         JTextField dest = new JTextField();
         JButton submitButton = new JButton("Submit");
         JButton cancelButton = new JButton("Cancel");
@@ -373,7 +387,16 @@ public class GUI extends JFrame {
                 String filePath = path.getLastPathComponent().toString();
                 zipList.add(filePath);
             }
-            zipFile(zipList, chooser.getSelectedFile() + "/" + dest.getText() + ".zip");
+            Zip zip = new Zip();
+            zip.zipFrame.setVisible(true);
+            ZipThread zipThread = new ZipThread(zip.jProgressBar, zipList, chooser.getSelectedFile() + "/" + dest.getText() + ".zip");
+            String threadId = zipThread.getName();
+            zip.threadId = threadId;
+            zipThread.start();
+            if (zipThread.progress == 100)
+                zip.zipFrame.setVisible(false);
+
+            direcTree.setModel(new FilesContentProvider(Root));
 
             zipFileFrame.setVisible(false);
             direcTree.setModel(new FilesContentProvider(""));
@@ -563,60 +586,15 @@ public class GUI extends JFrame {
         }
     }
 
-    void copyFile(File source, File dest) throws IOException {
-        Files.copy(source.toPath(), dest.toPath(), REPLACE_EXISTING);
-    }
-
-    void zipFile(List<String> srcFiles, String zipFile) {
-        try {
-
-            // create byte buffer
-            byte[] buffer = new byte[1024];
-
-            FileOutputStream fos = new FileOutputStream(zipFile);
-
-            ZipOutputStream zos = new ZipOutputStream(fos);
-
-            for (int i = 0; i < srcFiles.size(); i++) {
-
-                File srcFile = new File(srcFiles.get(i));
-
-                FileInputStream fis = new FileInputStream(srcFile);
-
-                // begin writing a new ZIP entry, positions the stream to the start of the entry data
-                zos.putNextEntry(new ZipEntry(srcFile.getName()));
-
-                int length;
-
-                while ((length = fis.read(buffer)) > 0) {
-                    zos.write(buffer, 0, length);
-                }
-
-                zos.closeEntry();
-
-                // close the InputStream
-                fis.close();
-
-            }
-
-            // close the ZipOutputStream
-            zos.close();
-        }
-        catch (IOException ioe) {
-        }
-    }
-
     private void setTableData(final File[] files) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                if (fileTableModel == null) {
-                    fileTableModel = new FileTableModel();
-                    table.setModel(fileTableModel);
-                }
-                table.getSelectionModel().removeListSelectionListener(listSelectionListener);
-                fileTableModel.setFiles(files);
-                table.getSelectionModel().addListSelectionListener(listSelectionListener);
+        SwingUtilities.invokeLater(() -> {
+            if (fileTableModel == null) {
+                fileTableModel = new FileTableModel();
+                table.setModel(fileTableModel);
             }
+            table.getSelectionModel().removeListSelectionListener(listSelectionListener);
+            fileTableModel.setFiles(files);
+            table.getSelectionModel().addListSelectionListener(listSelectionListener);
         });
     }
 

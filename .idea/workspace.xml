@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="117eeb30-440f-48e5-abe4-922fba498c6c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/FileManagementSystem/ItemTreeCellRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/FileManagementSystem/Copy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/FileManagementSystem/CopyThread.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/FileManagementSystem/Zip.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/FileManagementSystem/ZipThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/FileManagementSystem/META-INF/FileManagementSystem.kotlin_module" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FileManagementSystem/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileManagementSystem/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FileManagementSystem/ItemTreeCellRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileManagementSystem/ItemTreeCellRenderer.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,17 +25,65 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="76" column="61" selection-start-line="76" selection-start-column="61" selection-end-line="76" selection-end-column="61" />
+            <state relative-caret-position="-91">
+              <caret line="327" column="31" lean-forward="true" selection-start-line="327" selection-start-column="31" selection-end-line="327" selection-end-column="31" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/CopyThread.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="292">
+              <caret line="68" selection-start-line="68" selection-end-line="68" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/Zip.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-274">
+              <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/Copy.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-64">
+              <caret line="28" column="49" selection-start-line="28" selection-start-column="49" selection-end-line="28" selection-end-column="49" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/ZipThread.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="182">
+              <caret line="42" column="57" selection-start-line="42" selection-start-column="57" selection-end-line="42" selection-end-column="57" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/ItemTreeCellRenderer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="32" column="33" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
+            <state relative-caret-position="390">
+              <caret line="26" column="29" lean-forward="true" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -111,8 +162,12 @@
         <option value="$PROJECT_DIR$/src/FileManagementSystem/FileManagementSystem.java" />
         <option value="$USER_HOME$/Desktop/win.java" />
         <option value="$PROJECT_DIR$/src/FileManagementSystem/FilesContentProvider.java" />
-        <option value="$PROJECT_DIR$/src/FileManagementSystem/GUI.java" />
         <option value="$PROJECT_DIR$/src/FileManagementSystem/ItemTreeCellRenderer.java" />
+        <option value="$PROJECT_DIR$/src/FileManagementSystem/Zip.java" />
+        <option value="$PROJECT_DIR$/src/FileManagementSystem/GUI.java" />
+        <option value="$PROJECT_DIR$/src/FileManagementSystem/Copy.java" />
+        <option value="$PROJECT_DIR$/src/FileManagementSystem/ZipThread.java" />
+        <option value="$PROJECT_DIR$/src/FileManagementSystem/CopyThread.java" />
       </list>
     </option>
   </component>
@@ -204,12 +259,12 @@
       <updated>1576769393728</updated>
       <workItem from="1576769395620" duration="7443000" />
       <workItem from="1576835589471" duration="64658000" />
-      <workItem from="1577267791323" duration="3436000" />
+      <workItem from="1577267791323" duration="31019000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75537000" />
+    <option name="totallyTimeSpent" value="103120000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="732" extended-state="0" />
@@ -224,7 +279,7 @@
       <window_info id="UI Designer" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.465625" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.425" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -232,7 +287,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.3296875" />
+      <window_info active="true" anchor="bottom" id="Messages" order="10" visible="true" weight="0.3296875" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
       <window_info anchor="bottom" id="Version Control" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -364,17 +419,83 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/GUI.java">
+    <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/ItemTreeCellRenderer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="76" column="61" selection-start-line="76" selection-start-column="61" selection-end-line="76" selection-end-column="61" />
+        <state relative-caret-position="390">
+          <caret line="26" column="29" lean-forward="true" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/ItemTreeCellRenderer.java">
+    <entry file="file://$USER_HOME$/Desktop/TrVinh/LibraryGUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="32" column="33" selection-start-line="32" selection-start-column="33" selection-end-line="32" selection-end-column="33" />
+        <state relative-caret-position="-7162" />
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-12.0.1.jdk/Contents/Home/lib/src.zip!/java.base/java/lang/String.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="3409" column="18" selection-start-line="3409" selection-start-column="18" selection-end-line="3409" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-12.0.1.jdk/Contents/Home/lib/src.zip!/java.base/java/io/FileOutputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="234" column="8" selection-start-line="234" selection-start-column="8" selection-end-line="234" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-12.0.1.jdk/Contents/Home/lib/src.zip!/java.base/java/lang/Thread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="143" column="6" selection-start-line="143" selection-start-column="6" selection-end-line="143" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/GUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-91">
+          <caret line="327" column="31" lean-forward="true" selection-start-line="327" selection-start-column="31" selection-end-line="327" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/Copy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-64">
+          <caret line="28" column="49" selection-start-line="28" selection-start-column="49" selection-end-line="28" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/Zip.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-274">
+          <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/ZipThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="42" column="57" selection-start-line="42" selection-start-column="57" selection-end-line="42" selection-end-column="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/CopyThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="68" selection-start-line="68" selection-end-line="68" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
