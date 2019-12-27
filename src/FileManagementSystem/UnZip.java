@@ -4,18 +4,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Set;
 
-public class Zip {
-    public JFrame zipFrame;
-    public JPanel zipPanel;
+public class UnZip {
+    public JFrame UnzipFrame;
+    public JPanel UnzipPanel;
     public JProgressBar jProgressBar;
     public JButton cancelButton;
     public String threadId;
 
-    public Zip() {
-        zipFrame = new JFrame("Zip Files");
+    public UnZip() {
+        UnzipFrame = new JFrame("Unzip Files");
 
-        zipPanel = new JPanel();
-        zipPanel.setLayout(new BoxLayout(zipPanel, BoxLayout.Y_AXIS));
+        UnzipPanel = new JPanel();
+        UnzipPanel.setLayout(new BoxLayout(UnzipPanel, BoxLayout.Y_AXIS));
 
         jProgressBar = new JProgressBar();
         jProgressBar.setStringPainted(true);
@@ -32,19 +32,19 @@ public class Zip {
                     }
                 }
             }
-            zipFrame.setVisible(false);
-            zipFrame.dispose();
+            UnzipFrame.setVisible(false);
+            UnzipFrame.dispose();
         });
 
-        zipPanel.add(jProgressBar);
-        zipPanel.add(Box.createRigidArea(new Dimension(50, 5)));
-        zipPanel.add(cancelButton);
-        zipPanel.setPreferredSize(new Dimension(500, 50));
-        zipFrame.getContentPane().add(zipPanel);
+        UnzipPanel.add(jProgressBar);
+        UnzipPanel.add(Box.createRigidArea(new Dimension(50, 5)));
+        UnzipPanel.add(cancelButton);
+        UnzipPanel.setPreferredSize(new Dimension(500, 50));
+        UnzipFrame.getContentPane().add(UnzipPanel);
 
-        zipFrame.pack();
-        zipFrame.setLocationRelativeTo(null);
-        zipFrame.setVisible(true);
+        UnzipFrame.pack();
+        UnzipFrame.setLocationRelativeTo(null);
+        UnzipFrame.setVisible(true);
     }
 }
 

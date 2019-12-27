@@ -7,48 +7,53 @@ import java.util.List;
 public class CopyThread extends Thread {
     private JProgressBar progressBar;
     public double progress;
-    private List<String> srcFiles;
+    private List<File> srcFiles;
     private String path;
+    private Copy copy;
 
-    public CopyThread(JProgressBar progressBar, List<String> srcFiles, String path) {
+    public CopyThread(JProgressBar progressBar, List<File> srcFiles, String path, Copy copy) {
         this.progressBar = progressBar;
         this.srcFiles = srcFiles;
         this.path = path;
+        this.copy = copy;
     }
 
     public void run() {
         try {
             FileInputStream is;
-            double total = 0;
-            double size = 0;
-            for(var srcFile : srcFiles){
+            long total = 0;
+            long size = 0;
+            for (var srcFile : srcFiles) {
                 size += srcFile.length();
             }
             byte[] buffer = new byte[1024];
 
-            for (int i = 0; i < srcFiles.size(); i++) {
-                File srcFile = new File(srcFiles.get(i));
-                if(!srcFile.isDirectory()) {
+            for (var srcFile : srcFiles) {
+                if (!srcFile.isDirectory()) {
                     is = new FileInputStream(srcFile);
                     File desFile = new File(path + "/" + srcFile.getName());
-                    if(desFile.exists())
+                    if (desFile.exists())
                         desFile = new File(CheckPostFix(path + "/" + srcFile.getName()));
                     FileOutputStream os = new FileOutputStream(desFile);
                     int length;
                     while ((length = is.read(buffer)) > 0 && !Thread.currentThread().isInterrupted()) {
                         os.write(buffer, 0, length);
                         total += length;
-                        progress = total /size * 100;
+                        progress = total / (double) size * 100;
                         SwingUtilities.invokeLater(() -> progressBar.setValue((int) progress));
                     }
                     is.close();
                     os.close();
                 }
             }
-            Thread.sleep(1000);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            sleep(1000);
+            copy.copyFrame.setVisible(false);
+        }catch (IOException e){
+                e.printStackTrace();
+            }
+        catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
     }
     private String CheckPostFix(String s) {
         File f = new File(s);

@@ -147,6 +147,9 @@ public class GUI extends JFrame {
             zipFileClicked();
         });
         JMenuItem unzipFile = new JMenuItem("Unzip File");
+        unzipFile.addActionListener((e) -> {
+            unzipFileClicked();
+        });
 
         file.add(createFile);
         file.add(deleteFile);
@@ -176,6 +179,58 @@ public class GUI extends JFrame {
         mb.add(file);
         mb.add(folder);
         return mb;
+    }
+
+    private void unzipFileClicked() {
+        JFrame unzipFileFrame = new JFrame("UnZip File");
+        JPanel unzipFilePanel = new JPanel();
+
+        JFileChooser chooser = new JFileChooser("/");
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        JTextField dest = new JTextField();
+        if(chooser.showOpenDialog(unzipFileFrame) == JFileChooser.APPROVE_OPTION)
+            dest.setText(chooser.getSelectedFile().getAbsolutePath());
+
+        JButton submitButton = new JButton("Submit");
+        JButton cancelButton = new JButton("Cancel");
+
+        unzipFilePanel.add(new JLabel("Destination: "));
+        unzipFilePanel.add(dest);
+        unzipFilePanel.add(submitButton);
+        unzipFilePanel.add(cancelButton);
+        unzipFilePanel.setLayout(new GridLayout(2, 2));
+        unzipFilePanel.setPreferredSize(new Dimension(500, 50));
+
+        unzipFileFrame.setContentPane(unzipFilePanel);
+
+        submitButton.addActionListener((e) -> {
+            String Root = direcTree.getModel().getRoot().toString();
+            TreePath[] paths = direcTree.getSelectionPaths();
+            for (TreePath path : paths) {
+                String filePath = path.getLastPathComponent().toString();
+
+                UnZip unzip = new UnZip();
+                unzip.UnzipFrame.setVisible(true);
+                UnZipThread unzipThread = new UnZipThread(unzip.jProgressBar, new File(filePath), dest.getText(), unzip);
+                String threadId = unzipThread.getName();
+                unzip.threadId = threadId;
+                unzipThread.start();
+                System.out.println(unzipThread.progress);
+            }
+
+            direcTree.setModel(new FilesContentProvider(Root));
+
+            unzipFileFrame.setVisible(false);
+            direcTree.setModel(new FilesContentProvider(""));
+            direcTree.setModel(new FilesContentProvider(Root));
+        });
+        cancelButton.addActionListener((e) -> {
+            unzipFileFrame.setVisible(false);
+        });
+
+        unzipFileFrame.pack();
+        unzipFileFrame.setLocationRelativeTo(null);
+        unzipFileFrame.setVisible(true);
     }
 
     private void renameFolderClicked() {
@@ -325,15 +380,16 @@ public class GUI extends JFrame {
         submitButton.addActionListener((e) -> {
             String Root = direcTree.getModel().getRoot().toString();
             TreePath[] paths = direcTree.getSelectionPaths();
-            List<String> copyList = new ArrayList<>();
+            List<File> copyList = new ArrayList<>();
             for (TreePath path : paths) {
                 String filePath = path.getLastPathComponent().toString();
-                copyList.add(filePath);
+                File f = new File(filePath);
+                copyList.add(f);
             }
             Copy copy = new Copy();
             copy.copyFrame.setVisible(true);
             try {
-                CopyThread copyThread = new CopyThread(copy.jProgressBar, copyList, dest.getText());
+                CopyThread copyThread = new CopyThread(copy.jProgressBar, copyList, dest.getText(), copy);
                 String threadId = copyThread.getName();
                 copy.threadId = threadId;
                 copyThread.start();
@@ -381,15 +437,16 @@ public class GUI extends JFrame {
 
         submitButton.addActionListener((e) -> {
             String Root = direcTree.getModel().getRoot().toString();
-            List<String> zipList = new ArrayList<>();
+            List<File> zipList = new ArrayList<>();
             TreePath[] paths = direcTree.getSelectionPaths();
             for (TreePath path : paths) {
                 String filePath = path.getLastPathComponent().toString();
-                zipList.add(filePath);
+                File f = new File(filePath);
+                zipList.add(f);
             }
             Zip zip = new Zip();
             zip.zipFrame.setVisible(true);
-            ZipThread zipThread = new ZipThread(zip.jProgressBar, zipList, chooser.getSelectedFile() + "/" + dest.getText() + ".zip");
+            ZipThread zipThread = new ZipThread(zip.jProgressBar, zipList, chooser.getSelectedFile() + "/" + dest.getText() + ".zip", zip);
             String threadId = zipThread.getName();
             zip.threadId = threadId;
             zipThread.start();
@@ -552,6 +609,9 @@ public class GUI extends JFrame {
         JPanel btn = new JPanel();
 
         JButton prevBtn = new JButton("<");
+        prevBtn.addActionListener((e)->{
+            prevBtnClick();
+        });
         prevBtn.setPreferredSize(new Dimension(30, 20));
         JButton nextBtn = new JButton(">");
         nextBtn.setPreferredSize(new Dimension(30, 20));
@@ -565,6 +625,16 @@ public class GUI extends JFrame {
         menu.add(search, BorderLayout.EAST);
 
         return menu;
+    }
+
+    private void prevBtnClick() {
+        var paths = direcTree.getSelectionPaths();
+        for (TreePath path : paths) {
+            String filePath = path.getLastPathComponent().toString();
+            File f = new File(filePath);
+            String prevRoot = f.getParent();
+            direcTree.setModel(new FilesContentProvider(prevRoot));
+        }
     }
 
     void setAddrPanel(File file) {

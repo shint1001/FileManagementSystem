@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -11,13 +12,15 @@ import java.util.zip.ZipOutputStream;
 public class ZipThread extends Thread {
     private JProgressBar progressBar;
     public double progress;
-    private List<String> srcFiles;
+    private List<File> srcFiles;
     private String desFile;
+    private Zip zip;
 
-    public ZipThread(JProgressBar progressBar, List<String> srcFiles, String desFile) {
+    public ZipThread(JProgressBar progressBar, List<File> srcFiles, String desFile, Zip zip) {
         this.progressBar = progressBar;
         this.srcFiles = srcFiles;
         this.desFile = desFile;
+        this.zip = zip;
     }
 
     public void run() {
@@ -31,8 +34,7 @@ public class ZipThread extends Thread {
             }
             byte[] buffer = new byte[1024];
 
-            for (int i = 0; i < srcFiles.size(); i++) {
-                File srcFile = new File(srcFiles.get(i));
+            for(var srcFile : srcFiles) {
                 if(!srcFile.isDirectory()) {
                     FileInputStream is = new FileInputStream(srcFile);
                     zos.putNextEntry(new ZipEntry(srcFile.getName()));
@@ -48,8 +50,13 @@ public class ZipThread extends Thread {
                 }
             }
             zos.close();
-        } catch (Exception e) {
+            sleep(1000);
+            zip.zipFrame.setVisible(false);
+        } catch (IOException e){
             e.printStackTrace();
+        }
+        catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
     }
 }

@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="117eeb30-440f-48e5-abe4-922fba498c6c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/FileManagementSystem/Copy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/FileManagementSystem/CopyThread.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/FileManagementSystem/Zip.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/FileManagementSystem/ZipThread.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/FileManagementSystem/UnZip.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/FileManagementSystem/UnZipThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FileManagementSystem/CopyThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileManagementSystem/CopyThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FileManagementSystem/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileManagementSystem/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FileManagementSystem/ItemTreeCellRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileManagementSystem/ItemTreeCellRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FileManagementSystem/Zip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileManagementSystem/Zip.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FileManagementSystem/ZipThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileManagementSystem/ZipThread.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,20 +22,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/GUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-91">
-              <caret line="327" column="31" lean-forward="true" selection-start-line="327" selection-start-column="31" selection-end-line="327" selection-end-column="31" />
+            <state relative-caret-position="268">
+              <caret line="636" column="9" lean-forward="true" selection-start-line="636" selection-start-column="9" selection-end-line="636" selection-end-column="9" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/CopyThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="68" selection-start-line="68" selection-end-line="68" />
+            <state relative-caret-position="132">
+              <caret line="46" column="16" lean-forward="true" selection-start-line="46" selection-start-column="16" selection-end-line="46" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -46,20 +46,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/Zip.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-274">
-              <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/Copy.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-64">
-              <caret line="28" column="49" selection-start-line="28" selection-start-column="49" selection-end-line="28" selection-end-column="49" />
+            <state relative-caret-position="18">
+              <caret line="14" column="43" lean-forward="true" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -70,8 +58,32 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/ZipThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="42" column="57" selection-start-line="42" selection-start-column="57" selection-end-line="42" selection-end-column="57" />
+            <state relative-caret-position="67">
+              <caret line="14" column="32" lean-forward="true" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/UnZipThread.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="137">
+              <caret line="49" column="40" lean-forward="true" selection-start-line="49" selection-start-column="40" selection-end-line="49" selection-end-column="40" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/UnZip.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="73">
+              <caret line="24" column="60" selection-start-line="24" selection-start-column="60" selection-end-line="24" selection-end-column="60" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -86,20 +98,6 @@
               <caret line="26" column="29" lean-forward="true" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/FilesContentProvider.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="27" column="5" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#294#295#0" expanded="true" />
-                <element signature="e#331#332#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -149,6 +147,7 @@
       <find>currentFile</find>
       <find>valueChanged</find>
       <find>rename</find>
+      <find>&lt;</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -163,11 +162,13 @@
         <option value="$USER_HOME$/Desktop/win.java" />
         <option value="$PROJECT_DIR$/src/FileManagementSystem/FilesContentProvider.java" />
         <option value="$PROJECT_DIR$/src/FileManagementSystem/ItemTreeCellRenderer.java" />
-        <option value="$PROJECT_DIR$/src/FileManagementSystem/Zip.java" />
-        <option value="$PROJECT_DIR$/src/FileManagementSystem/GUI.java" />
         <option value="$PROJECT_DIR$/src/FileManagementSystem/Copy.java" />
-        <option value="$PROJECT_DIR$/src/FileManagementSystem/ZipThread.java" />
+        <option value="$PROJECT_DIR$/src/FileManagementSystem/Zip.java" />
+        <option value="$PROJECT_DIR$/src/FileManagementSystem/UnZip.java" />
         <option value="$PROJECT_DIR$/src/FileManagementSystem/CopyThread.java" />
+        <option value="$PROJECT_DIR$/src/FileManagementSystem/ZipThread.java" />
+        <option value="$PROJECT_DIR$/src/FileManagementSystem/UnZipThread.java" />
+        <option value="$PROJECT_DIR$/src/FileManagementSystem/GUI.java" />
       </list>
     </option>
   </component>
@@ -259,12 +260,12 @@
       <updated>1576769393728</updated>
       <workItem from="1576769395620" duration="7443000" />
       <workItem from="1576835589471" duration="64658000" />
-      <workItem from="1577267791323" duration="31019000" />
+      <workItem from="1577267791323" duration="40751000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="103120000" />
+    <option name="totallyTimeSpent" value="112852000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="732" extended-state="0" />
@@ -279,7 +280,7 @@
       <window_info id="UI Designer" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.425" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.425" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -287,7 +288,7 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Messages" order="10" visible="true" weight="0.3296875" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.3296875" />
       <window_info anchor="bottom" id="Database Changes" order="11" />
       <window_info anchor="bottom" id="Version Control" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -310,7 +311,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/FileManagementSystem/GUI.java</url>
-          <line>283</line>
+          <line>338</line>
           <properties />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
@@ -455,16 +456,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/GUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-91">
-          <caret line="327" column="31" lean-forward="true" selection-start-line="327" selection-start-column="31" selection-end-line="327" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/Copy.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-64">
+        <state relative-caret-position="190">
           <caret line="28" column="49" selection-start-line="28" selection-start-column="49" selection-end-line="28" selection-end-column="49" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -474,8 +468,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/Zip.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-274">
-          <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+        <state relative-caret-position="18">
+          <caret line="14" column="43" lean-forward="true" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -484,8 +478,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/ZipThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="42" column="57" selection-start-line="42" selection-start-column="57" selection-end-line="42" selection-end-column="57" />
+        <state relative-caret-position="67">
+          <caret line="14" column="32" lean-forward="true" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/UnZip.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="73">
+          <caret line="24" column="60" selection-start-line="24" selection-start-column="60" selection-end-line="24" selection-end-column="60" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -494,11 +498,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/CopyThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="68" selection-start-line="68" selection-end-line="68" />
+        <state relative-caret-position="132">
+          <caret line="46" column="16" lean-forward="true" selection-start-line="46" selection-start-column="16" selection-end-line="46" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/UnZipThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="49" column="40" lean-forward="true" selection-start-line="49" selection-start-column="40" selection-end-line="49" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FileManagementSystem/GUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="636" column="9" lean-forward="true" selection-start-line="636" selection-start-column="9" selection-end-line="636" selection-end-column="9" />
         </state>
       </provider>
     </entry>
