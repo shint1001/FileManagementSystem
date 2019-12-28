@@ -331,19 +331,22 @@ public class GUI extends JFrame {
 
         submitButton.addActionListener((e) -> {
             String Root = direcTree.getModel().getRoot().toString();
-            String currentRoot = direcTree.getLastSelectedPathComponent().toString();
-            String fileName = nameFolder.getText();
+            TreePath[] paths = direcTree.getSelectionPaths();
+            for (TreePath path : paths) {
+                String filePath = path.getLastPathComponent().toString();
+                String fileName = nameFolder.getText();
 
-            File f = new File(currentRoot + "/" + fileName);
-            System.out.println(f);
-            boolean newFolder = f.mkdirs();
-            if(newFolder)
-                JOptionPane.showMessageDialog(createFolderPanel, "Directory created successfully");
-            else
-                JOptionPane.showMessageDialog(createFolderPanel, "Couldn’t create specified directory");
-            createFolderFrame.setVisible(false);
-            direcTree.setModel(new FilesContentProvider(""));
-            direcTree.setModel(new FilesContentProvider(Root));
+                File f = new File(filePath + "/" + fileName);
+                System.out.println(f);
+                boolean newFolder = f.mkdirs();
+                if (newFolder)
+                    JOptionPane.showMessageDialog(createFolderPanel, "Directory created successfully");
+                else
+                    JOptionPane.showMessageDialog(createFolderPanel, "Couldn’t create specified directory");
+                createFolderFrame.setVisible(false);
+                direcTree.setModel(new FilesContentProvider(""));
+                direcTree.setModel(new FilesContentProvider(Root));
+            }
         });
         cancelButton.addActionListener((e) -> {
             createFolderFrame.setVisible(false);
@@ -534,12 +537,12 @@ public class GUI extends JFrame {
         JFrame createFileFrame = new JFrame("Create File");
         JPanel createFilePanel = new JPanel();
 
-        JTextField path = new JTextField();
+        JTextField _path = new JTextField();
         JButton submitButton = new JButton("Submit");
         JButton cancelButton = new JButton("Cancel");
 
         createFilePanel.add(new JLabel("File Name"));
-        createFilePanel.add(path);
+        createFilePanel.add(_path);
         createFilePanel.add(submitButton);
         createFilePanel.add(cancelButton);
         createFilePanel.setLayout(new GridLayout(2, 2));
@@ -549,13 +552,15 @@ public class GUI extends JFrame {
 
         submitButton.addActionListener((e) -> {
             String Root = direcTree.getModel().getRoot().toString();
-            String currentRoot = direcTree.getLastSelectedPathComponent().toString();
-            String fileName = path.getText();
-            if (fileName != null) {
-                File newFile = new File(currentRoot + "/" + fileName);
-                System.out.println(newFile);
-                if (newFile.exists()) {
-                    String newFileName = CheckPostFix(currentRoot + "/" + fileName);
+            TreePath [] paths = direcTree.getSelectionPaths();
+            String fileName = _path.getText();
+            for (TreePath path : paths) {
+                String filePath = path.getLastPathComponent().toString();
+                if (fileName != null) {
+                    File newFile = new File(filePath + "/" + fileName);
+                    System.out.println(newFile);
+                    if (newFile.exists()) {
+                        String newFileName = CheckPostFix(filePath + "/" + fileName);
 
                         File file = new File(newFileName);
                         try {
@@ -565,13 +570,14 @@ public class GUI extends JFrame {
                         } catch (IOException ex) {
                             JOptionPane.showMessageDialog(null, "File Created Failed");
                         }
-                } else {
-                    try {
-                        if (newFile.createNewFile()) {
-                            JOptionPane.showMessageDialog(null, "File Created");
+                    } else {
+                        try {
+                            if (newFile.createNewFile()) {
+                                JOptionPane.showMessageDialog(null, "File Created");
+                            }
+                        } catch (IOException ex) {
+                            JOptionPane.showMessageDialog(null, "File Created Failed");
                         }
-                    } catch (IOException ex) {
-                        JOptionPane.showMessageDialog(null, "File Created Failed");
                     }
                 }
             }
